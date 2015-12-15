@@ -31,8 +31,10 @@
                 Dim F3 As String = ",GMCNo='" & Staff_Form.TextBox103.Text.ToString & "'"
                 Dim F4 As String = ",Site='" & Staff_Form.ComboBox101.Text.ToString & "'"
                 Dim F5 As String = ",Contract='" & Staff_Form.ComboBox102.Text.ToString & "'"
+                Dim F6 As String = ",Posi='" & Staff_Form.TextBox104.Text.ToString & "'"
+                Dim F7 As String = ",Line_Manager='" & Staff_Form.TextBox105.Text.ToString & "'"
 
-                Dim SqlCode As String = "UPDATE Staff SET " & F1 & F2 & F3 & F4 & F5 &
+                Dim SqlCode As String = "UPDATE Staff SET " & F1 & F2 & F3 & F4 & F5 & F6 & F7 &
                     " WHERE Staff_ID=" & CurrentStaff
 
 

@@ -145,7 +145,7 @@
 
                 If Not IsDBNull(TempTbl2.Rows(0).Item("AppDat")) Then
                     RevDate = TempTbl2.Rows(0).Item("AppDat")
-                    RevDate = DateAdd(DateInterval.Year, 5, ApprDate)
+                    RevDate = DateAdd(DateInterval.Year, 5, RevDate)
                 End If
 
                 OverClass.AddAllDataItem(Appr_View.SplitContainer1)

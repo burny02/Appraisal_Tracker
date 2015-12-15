@@ -61,7 +61,7 @@
 
             CurrentStaff = sender.item("Staff_ID", e.RowIndex).value
 
-            Dim SqlCode As String = "SELECT FName, SName, GMCNo, Site, Contract " &
+            Dim SqlCode As String = "SELECT FName, SName, GMCNo, Site, Contract, Posi, Line_Manager " &
                 "FROM Staff WHERE Staff_ID=" & CurrentStaff
             Dim TempTbl As DataTable = OverClass.TempDataTable(SqlCode)
             Staff_Form = New StaffForm
@@ -78,6 +78,8 @@
                 .TextBox101.Text = TempTbl.Rows(0).Item("FName").ToString
                 .TextBox102.Text = TempTbl.Rows(0).Item("SName").ToString
                 .TextBox103.Text = TempTbl.Rows(0).Item("GMCNo").ToString
+                .TextBox104.Text = TempTbl.Rows(0).Item("Posi").ToString
+                .TextBox105.Text = TempTbl.Rows(0).Item("Line_Manager").ToString
                 .ComboBox101.Text = TempTbl.Rows(0).Item("Site").ToString
                 .ComboBox102.Text = TempTbl.Rows(0).Item("Contract").ToString
                 .ComboBox101.Items.Add("MAN")
