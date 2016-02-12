@@ -9,7 +9,7 @@ Module Variables
     Private Const UserTable As String = "[Users]"
     Private Const UserField As String = "Username"
     Private Const LockTable As String = "[Locker]"
-    Private Const ActiveUsersTable As String = "[ActiveUsers]"
+    Private Const AuditTbl As String = "[Audit]"
     Private Contact As String = "Fiona Hughes"
     Public Const SolutionName As String = "Appraisal Tracker"
     Public CurrentStaff, CurAppr As Long
@@ -34,7 +34,7 @@ Module Variables
                            LockTable,
                            Contact,
                            Connect2,
-                           ActiveUsersTable)
+                           AuditTbl)
 
         OverClass.LockCheck()
 

@@ -33,8 +33,10 @@
 
             Case "Staff"
                 ctl = Me.DataGridView1
-                SQLCode = "SELECT Staff_ID, FName, SName FROM Staff WHERE Hidden=False ORDER BY FName ASC"
+                SQLCode = "SELECT * FROM StaffQry WHERE Hidden=False ORDER BY FName ASC"
                 OverClass.CreateDataSet(SQLCode, Bind, ctl)
+                ctl.Columns("AppDate").Visible = False
+                ctl.Columns("RevalDate").Visible = False
                 ctl.Columns("Staff_ID").Visible = False
                 ctl.Columns("FName").HeaderText = "Name"
                 ctl.Columns("SName").HeaderText = "Surname"
@@ -44,7 +46,6 @@
                 ctl.Columns.Add(NewClm)
                 NewClm.HeaderText = "View"
                 NewClm.Name = "View"
-
         End Select
 
 
@@ -107,5 +108,27 @@
             e.Cancel = True
         End If
 
+    End Sub
+
+    Private Sub DataGridView1_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles DataGridView1.RowPrePaint
+
+        Dim AppDate As Date = "01-Jan-2500"
+        Dim RevalDate As Date = "01-Jan-2500"
+
+        Try
+            AppDate = DataGridView1.Item("AppDate", e.RowIndex).Value
+        Catch ex As Exception
+        End Try
+
+        Try
+            RevalDate = DataGridView1.Item("RevalDate", e.RowIndex).Value
+        Catch ex As Exception
+        End Try
+
+        If e.RowIndex <> DataGridView1.NewRowIndex Then
+            If AppDate <= DateAndTime.Now Or RevalDate <= DateAndTime.Now Then
+                DataGridView1.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Yellow
+            End If
+        End If
     End Sub
 End Class
