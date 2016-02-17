@@ -33,7 +33,7 @@
 
             Case "Staff"
                 ctl = Me.DataGridView1
-                SQLCode = "SELECT * FROM StaffQry WHERE Hidden=False ORDER BY FName ASC"
+                SQLCode = "SELECT * FROM StaffQry ORDER BY FName ASC"
                 OverClass.CreateDataSet(SQLCode, Bind, ctl)
                 ctl.Columns("AppDate").Visible = False
                 ctl.Columns("RevalDate").Visible = False
@@ -99,16 +99,6 @@
 
     End Sub
 
-
-    Private Sub DataGridView1_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridView1.CellBeginEdit
-
-        If IsDBNull(sender.item("Staff_ID", e.RowIndex).value) Or IsNothing(sender.item("Staff_ID", e.RowIndex).value) Then
-            Exit Sub
-        Else
-            e.Cancel = True
-        End If
-
-    End Sub
 
     Private Sub DataGridView1_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles DataGridView1.RowPrePaint
 

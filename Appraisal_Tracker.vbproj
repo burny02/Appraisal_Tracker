@@ -29,7 +29,7 @@
     <ProductName>Appraisal_Tracker</ProductName>
     <PublisherName>David Burnside</PublisherName>
     <SuiteName>Appraisal_Tracker</SuiteName>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -174,15 +174,19 @@
   <ItemGroup>
     <EmbeddedResource Include="Appraisal_View.resx">
       <DependentUpon>Appraisal_View.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Appr_Form.resx">
       <DependentUpon>Appr_Form.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GMC_Status.resx">
       <DependentUpon>GMC_Status.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -192,9 +196,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Personal_Info.resx">
       <DependentUpon>Personal_Info.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Prof_Profile.resx">
       <DependentUpon>Prof_Profile.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="StaffForm.resx">
       <DependentUpon>StaffForm.vb</DependentUpon>
