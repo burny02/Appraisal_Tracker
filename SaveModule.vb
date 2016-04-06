@@ -27,11 +27,12 @@
             Case "DataGridView1"
 
                 OverClass.CurrentDataAdapter.UpdateCommand = New OleDb.OleDbCommand("UPDATE Staff " &
-                                                               "SET FName=@P1, SName=@P2 WHERE Staff_ID=@P3")
+                                                               "SET FName=@P1, SName=@P2, Hidden=@P3 WHERE Staff_ID=@P4")
 
                 With OverClass.CurrentDataAdapter.UpdateCommand.Parameters
                     .Add("@P1", OleDb.OleDbType.VarChar, 255, "FName")
                     .Add("@P2", OleDb.OleDbType.VarChar, 255, "SName")
+                    .Add("@P3", OleDb.OleDbType.Boolean, 255, "Hidden")
                     .Add("@P3", OleDb.OleDbType.Double, 255, "Staff_ID")
                 End With
 

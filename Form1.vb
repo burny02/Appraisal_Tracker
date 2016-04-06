@@ -38,14 +38,21 @@
                 ctl.Columns("AppDate").Visible = False
                 ctl.Columns("RevalDate").Visible = False
                 ctl.Columns("Staff_ID").Visible = False
+                ctl.Columns("Hidden").Visible = False
                 ctl.Columns("FName").HeaderText = "Name"
                 ctl.Columns("SName").HeaderText = "Surname"
                 Dim NewClm As New DataGridViewImageColumn
                 NewClm.Image = My.Resources.Lookup
-                NewClm.ImageLayout = ImageLayout.Stretch
+                NewClm.ImageLayout = DataGridViewImageCellLayout.Zoom
                 ctl.Columns.Add(NewClm)
                 NewClm.HeaderText = "View"
                 NewClm.Name = "View"
+                Dim HideClm As New DataGridViewImageColumn
+                HideClm.Image = My.Resources.Hide
+                HideClm.ImageLayout = DataGridViewImageCellLayout.Zoom
+                HideClm.HeaderText = "Hide"
+                HideClm.Name = "Hide"
+                ctl.Columns.Add(HideClm)
         End Select
 
 
@@ -53,7 +60,18 @@
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
-        If e.ColumnIndex = sender.columns("View").index Then
+        If e.ColumnIndex = sender.columns("Hide").index Then
+            If IsDBNull(sender.Item("Staff_ID", e.RowIndex).Value) Then Exit Sub
+            If MsgBox("Are the sure you want to hide this member of staff?" & vbNewLine & vbNewLine &
+                      "Please save changes if yes", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                DataGridView1.Item("Hidden", e.RowIndex).Value = "TRUE"
+                DataGridView1.CurrentCell = Nothing
+                DataGridView1.Rows(e.RowIndex).Visible = False
+            End If
+        End If
+
+
+            If e.ColumnIndex = sender.columns("View").index Then
             If IsDBNull(sender.Item("Staff_ID", e.RowIndex).Value) Then Exit Sub
 
             If OverClass.UnloadData() = True Then
