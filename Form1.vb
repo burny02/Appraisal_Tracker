@@ -39,6 +39,8 @@
                 ctl.Columns("RevalDate").Visible = False
                 ctl.Columns("Staff_ID").Visible = False
                 ctl.Columns("Hidden").Visible = False
+                ctl.Columns("Appr_Due").Visible = False
+                ctl.Columns("Reval_Due").Visible = False
                 ctl.Columns("FName").HeaderText = "Name"
                 ctl.Columns("SName").HeaderText = "Surname"
                 Dim NewClm As New DataGridViewImageColumn
@@ -122,6 +124,18 @@
 
         Dim AppDate As Date = "01-Jan-2500"
         Dim RevalDate As Date = "01-Jan-2500"
+        Dim AppDue As Date = "01-Jan-2500"
+        Dim RevalDue As Date = "01-Jan-2500"
+
+        Try
+            AppDate = DataGridView1.Item("Appr_Due", e.RowIndex).Value
+        Catch ex As Exception
+        End Try
+
+        Try
+            RevalDate = DataGridView1.Item("Reval_Due", e.RowIndex).Value
+        Catch ex As Exception
+        End Try
 
         Try
             AppDate = DataGridView1.Item("AppDate", e.RowIndex).Value
@@ -134,7 +148,8 @@
         End Try
 
         If e.RowIndex <> DataGridView1.NewRowIndex Then
-            If AppDate <= DateAndTime.Now Or RevalDate <= DateAndTime.Now Then
+            If AppDate <= DateAndTime.Now Or RevalDate <= DateAndTime.Now Or
+            AppDue <= DateAndTime.Now Or RevalDue <= DateAndTime.Now Then
                 DataGridView1.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Yellow
             End If
         End If

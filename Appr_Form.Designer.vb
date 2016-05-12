@@ -33,11 +33,11 @@ Partial Class Appr_Form
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboBox601 = New System.Windows.Forms.ComboBox()
         Me.TextBox602 = New System.Windows.Forms.TextBox()
-        Me.TextBox601 = New System.Windows.Forms.TextBox()
         Me.PictureBox601 = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.DateTimePicker601 = New System.Windows.Forms.DateTimePicker()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -88,13 +88,13 @@ Partial Class Appr_Form
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.DateTimePicker601)
         Me.SplitContainer1.Panel2.Controls.Add(Me.TextBox604)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Label2)
         Me.SplitContainer1.Panel2.Controls.Add(Me.TextBox603)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Label1)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ComboBox601)
         Me.SplitContainer1.Panel2.Controls.Add(Me.TextBox602)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.TextBox601)
         Me.SplitContainer1.Panel2.Controls.Add(Me.PictureBox601)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Label3)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Label4)
@@ -151,13 +151,6 @@ Partial Class Appr_Form
         Me.TextBox602.Size = New System.Drawing.Size(174, 75)
         Me.TextBox602.TabIndex = 60
         '
-        'TextBox601
-        '
-        Me.TextBox601.Location = New System.Drawing.Point(428, 21)
-        Me.TextBox601.Name = "TextBox601"
-        Me.TextBox601.Size = New System.Drawing.Size(174, 22)
-        Me.TextBox601.TabIndex = 58
-        '
         'PictureBox601
         '
         Me.PictureBox601.BackgroundImage = Global.Appraisal_Tracker.My.Resources.Resources.Silhouette
@@ -196,6 +189,15 @@ Partial Class Appr_Form
         Me.Label5.TabIndex = 54
         Me.Label5.Text = "Date:"
         '
+        'DateTimePicker601
+        '
+        Me.DateTimePicker601.CustomFormat = "dd-MMM-yyyy"
+        Me.DateTimePicker601.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DateTimePicker601.Location = New System.Drawing.Point(428, 21)
+        Me.DateTimePicker601.Name = "DateTimePicker601"
+        Me.DateTimePicker601.Size = New System.Drawing.Size(174, 22)
+        Me.DateTimePicker601.TabIndex = 64
+        '
         'Appr_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -225,9 +227,9 @@ Partial Class Appr_Form
     Friend WithEvents Label1 As Label
     Friend WithEvents ComboBox601 As ComboBox
     Friend WithEvents TextBox602 As TextBox
-    Friend WithEvents TextBox601 As TextBox
     Friend WithEvents PictureBox601 As PictureBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents DateTimePicker601 As DateTimePicker
 End Class

@@ -35,7 +35,7 @@
 
             With Appraisal_Form
                 .Text = Appr_View.Text
-                .TextBox601.Text = TempTbl.Rows(0).Item("Appraisal_Date").ToString
+                .DateTimePicker601.Value = TempTbl.Rows(0).Item("Appraisal_Date").ToString
                 .TextBox602.Text = TempTbl.Rows(0).Item("SignedOff").ToString
                 .TextBox603.Text = TempTbl.Rows(0).Item("Conducted_By").ToString
                 .TextBox604.Text = TempTbl.Rows(0).Item("System").ToString
@@ -52,5 +52,25 @@
             Appraisal_Form = Nothing
 
         End If
+    End Sub
+
+    Private Sub Appraisal_View_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
+        If Appr_View.DateTimePicker1.Checked = True Then
+            OverClass.ExecuteSQL("UPDATE Staff SET Appr_Due=" &
+            OverClass.SQLDate(Appr_View.DateTimePicker1.Value) & " WHERE Staff_ID=" & CurrentStaff)
+        Else
+            OverClass.ExecuteSQL("UPDATE Staff SET Appr_Due=NULL" &
+                " WHERE Staff_ID=" & CurrentStaff)
+        End If
+
+        If Appr_View.DateTimePicker2.Checked = True Then
+            OverClass.ExecuteSQL("UPDATE Staff SET Reval_Due=" &
+            OverClass.SQLDate(Appr_View.DateTimePicker2.Value) & " WHERE Staff_ID=" & CurrentStaff)
+        Else
+            OverClass.ExecuteSQL("UPDATE Staff SET Reval_Due=NULL" &
+                " WHERE Staff_ID=" & CurrentStaff)
+        End If
+
     End Sub
 End Class

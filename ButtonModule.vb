@@ -107,7 +107,7 @@
             Case "Button103"
                 Appr_View = New Appraisal_View
 
-                Dim SQLCode = "SELECT Appraisal_ID, cdate(Appraisal_Date) as AppDat, Reval_Appr FROM Appraisal " &
+                Dim SQLCode As String = "SELECT Appraisal_ID, cdate(Appraisal_Date) as AppDat, Reval_Appr FROM Appraisal " &
                     "WHERE Staff_ID=" & CurrentStaff & " ORDER BY cdate(Appraisal_Date) DESC"
                 OverClass.CreateDataSet(SQLCode, Appr_View.BindingSource1, Appr_View.DataGridView501)
 
@@ -126,26 +126,38 @@
                 Dim ApprDate As Date = DateTime.Now
                 Dim RevDate As Date = DateTime.Now
 
-                SQLCode = "SELECT max(CDate(Appraisal_Date)) As AppDat FROM Appraisal " &
+                Dim SQLArray(2) As String
+                Dim TblArray(2) As DataTable
+
+                SQLArray(0) = "SELECT max(CDate(Appraisal_Date)) As AppDat FROM Appraisal " &
                     "WHERE Staff_ID=" & CurrentStaff & " AND Reval_Appr='Appraisal'"
 
-                Dim TempTbl As DataTable = OverClass.TempDataTable(SQLCode)
-
-
-                SQLCode = "SELECT max(CDate(Appraisal_Date)) As AppDat FROM Appraisal " &
+                SQLArray(1) = "SELECT max(CDate(Appraisal_Date)) As AppDat FROM Appraisal " &
                     "WHERE Staff_ID=" & CurrentStaff & " AND Reval_Appr='Revalidation'"
 
-                Dim TempTbl2 As DataTable = OverClass.TempDataTable(SQLCode)
+                SQLArray(2) = "SELECT Appr_Due, Reval_Due FROM Staff " &
+                    "WHERE Staff_ID=" & CurrentStaff
 
+                TblArray = OverClass.MultiTempDataTable(SQLArray)
 
-                If Not IsDBNull(TempTbl.Rows(0).Item("AppDat")) Then
-                    ApprDate = TempTbl.Rows(0).Item("AppDat")
+                If Not IsDBNull(TblArray(0).Rows(0).Item("AppDat")) Then
+                    ApprDate = TblArray(0).Rows(0).Item("AppDat")
                     ApprDate = DateAdd(DateInterval.Year, 1, ApprDate)
                 End If
 
-                If Not IsDBNull(TempTbl2.Rows(0).Item("AppDat")) Then
-                    RevDate = TempTbl2.Rows(0).Item("AppDat")
+                If Not IsDBNull(TblArray(1).Rows(0).Item("AppDat")) Then
+                    RevDate = TblArray(1).Rows(0).Item("AppDat")
                     RevDate = DateAdd(DateInterval.Year, 5, RevDate)
+                End If
+
+                If Not IsDBNull(TblArray(2).Rows(0).Item("Appr_Due")) Then
+                    Appr_View.DateTimePicker1.Checked = True
+                    Appr_View.DateTimePicker1.Value = TblArray(2).Rows(0).Item("Appr_Due")
+                End If
+
+                If Not IsDBNull(TblArray(2).Rows(0).Item("Reval_Due")) Then
+                    Appr_View.DateTimePicker2.Checked = True
+                    Appr_View.DateTimePicker2.Value = TblArray(2).Rows(0).Item("Reval_Due")
                 End If
 
                 OverClass.AddAllDataItem(Appr_View.SplitContainer1)
@@ -162,15 +174,29 @@
                     .TextBox501.Text = Format(RevDate, "dd-MMM-yyyy")
 
                     If ApprDate <= DateAndTime.Now Then
-                        .TextBox502.BackColor = Color.Red
+                        .Label2.ForeColor = Color.Red
                     Else
-                        .TextBox502.BackColor = Color.White
+                        .Label2.ForeColor = Color.Black
                     End If
 
                     If RevDate <= DateAndTime.Now Then
-                        .TextBox501.BackColor = Color.Red
+                        .Label1.ForeColor = Color.Red
                     Else
-                        .TextBox501.BackColor = Color.White
+                        .Label1.ForeColor = Color.Black
+                    End If
+
+                    If .DateTimePicker2.Checked = True And
+                        .DateTimePicker2.Value <= DateAndTime.Now Then
+                        .Label4.ForeColor = Color.Red
+                    Else
+                        .Label4.ForeColor = Color.Black
+                    End If
+
+                    If .DateTimePicker1.Checked = True And
+                        .DateTimePicker1.Value <= DateAndTime.Now Then
+                        .Label3.ForeColor = Color.Red
+                    Else
+                        .Label3.ForeColor = Color.Black
                     End If
 
                     .DialogResult = DialogResult.Abort

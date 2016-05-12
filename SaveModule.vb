@@ -119,12 +119,12 @@
 
             Case "Button601"
 
-                If IsDate(Appraisal_Form.TextBox601.Text) = False Then
+                If IsDate(Appraisal_Form.DateTimePicker601.Value) = False Then
                     MsgBox("Please ensure a correct date is entered")
                     Exit Sub
                 End If
 
-                If CDate(Appraisal_Form.TextBox601.Text) > DateAdd(DateInterval.Day, 1, DateTime.Now) Then
+                If CDate(Appraisal_Form.DateTimePicker601.Value) > DateAdd(DateInterval.Day, 1, DateTime.Now) Then
                     MsgBox("Please enter today's date or before")
                     Exit Sub
                 End If
@@ -137,7 +137,7 @@
                 Dim SqlCode As String = vbNullString
 
                 If New_Appr = False Then
-                    Dim F1 As String = "Appraisal_Date='" & Appraisal_Form.TextBox601.Text.ToString & "'"
+                    Dim F1 As String = "Appraisal_Date='" & Appraisal_Form.DateTimePicker601.Value.ToString & "'"
                     Dim F2 As String = ",SignedOff='" & Appraisal_Form.TextBox602.Text.ToString & "'"
                     Dim F3 As String = ",Conducted_By='" & Appraisal_Form.TextBox603.Text.ToString & "'"
                     Dim F4 As String = ",System='" & Appraisal_Form.TextBox604.Text.ToString & "'"
@@ -147,7 +147,7 @@
                 Else
                     SqlCode = "INSERT INTO Appraisal (Staff_ID, Appraisal_Date, Reval_Appr, SignedOff, Conducted_By, System) " &
                         "VALUES (" & CurrentStaff & "," &
-                        "'" & Appraisal_Form.TextBox601.Text.ToString & "'," &
+                        "'" & Appraisal_Form.DateTimePicker601.Value.ToString & "'," &
                         "'" & Appraisal_Form.ComboBox601.Text.ToString & "'," &
                         "'" & Appraisal_Form.TextBox602.Text.ToString & "'," &
                         "'" & Appraisal_Form.TextBox603.Text.ToString & "'," &
